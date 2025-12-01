@@ -74,7 +74,7 @@ module.exports.postUserLogin = async (req, res) => {
       httpOnly: true,
       maxAge: COOKIE_EXPIRES_DAYS * 24 * 60 * 60 * 1000,
       sameSite: "lax",
-      // secure: true  // enable only on HTTPS
+      secure: true  // enable only on HTTPS
     };
 
     // Set cookie

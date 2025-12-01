@@ -1,0 +1,50 @@
+<%- include("partials/header", { title: pageTitle, user, currentPage }) %>
+
+<main class="content">
+
+  <h1 class="ranking-title">Election Leaderboard</h1>
+
+  <section class="ranking-container" aria-live="polite">
+
+    <% if (!candidates || candidates.length === 0) { %>
+      <p class="no-data">No candidates found.</p>
+    <% } else { %>
+      <% candidates.forEach((c, index) => { %>
+        <article class="rank-card" role="article" aria-label="<%= c.name %> — Rank <%= index + 1 %>">
+
+          <% const rank = index + 1; %>
+          <div class="left-block">
+            <div class="rank-badge <%= rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : 'standard' %>" aria-hidden="true">
+            <% if (rank === 1) { %>
+              <span class="medal">🥇</span>
+            <% } else if (rank === 2) { %>
+              <span class="medal">🥈</span>
+            <% } else if (rank === 3) { %>
+              <span class="medal">🥉</span>
+            <% } else { %>
+              <span class="rank-num"><%= rank %></span>
+            <% } %>
+            </div>
+
+            <img class="rank-photo" src="<%= c.photo %>" alt="<%= c.name %> photo">
+          </div>
+
+          <div class="rank-info">
+            <h2 class="candidate-name"><%= c.name %></h2>
+            <p class="candidate-party"><%= c.party %></p>
+          </div>
+
+          <div class="rank-meta">
+            <img class="party-logo" src="<%= c.partySymbol %>" alt="<%= c.party %> logo">
+            <div class="rank-votes"><strong><%= c.votes %></strong> votes</div>
+          </div>
+
+        </article>
+      <% }) %>
+    <% } %>
+
+  </section>
+
+</main>
+
+<%- include("partials/footer") %>

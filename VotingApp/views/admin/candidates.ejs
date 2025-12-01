@@ -1,0 +1,43 @@
+<%- include('../partials/header', {title: pageTitle}) %>
+
+<main class="content">
+  <div class="candidate-grid">
+    <% candidates.forEach(c => { %>
+    <div class="candidate-card">
+      <img class="candidate-photo" src="<%= c.photo %>" alt="<%= c.name %>" />
+
+      <div class="candidate-info">
+        <h2 class="candidate-name"><%= c.name %></h2>
+        <p class="candidate-party"><%= c.party %></p>
+      </div>
+
+      <img
+        class="party-symbol"
+        src="<%= c.partySymbol %>"
+        alt="<%= c.party %> Party Symbol"
+      />
+
+      <div class="candidate-meta">
+        <p class="candidate-votes">Votes: <%= c.votes || 0 %></p>
+        <p class="candidate-status <%= c.isActive ? 'active' : 'inactive' %>">
+          <%= c.isActive ? '✓ Active' : '✗ Inactive' %>
+        </p>
+      </div>
+
+      <!-- ⭐ ACTION BUTTONS ADDED HERE -->
+      <% if (c.isActive) { %>
+      <form action="/admin/candidate/<%= c._id %>/disable" method="POST">
+        <button class="btn-disable">Disable</button>
+      </form>
+      <% } else { %>
+      <form action="/admin/candidate/<%= c._id %>/enable" method="POST">
+        <button class="btn-enable">Enable</button>
+      </form>
+      <% } %>
+      <!-- ⭐ END OF ACTION BUTTONS -->
+    </div>
+    <% }) %>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

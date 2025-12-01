@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title || "Voting App" %></title>
+    <!-- CSS file -->
+    <link rel="stylesheet" href="/css/index.css" />
+    
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container nav-container">
+        <div class="logo">
+          <a href="/">
+            <img src="/images/logo.png" alt="VoteHub" class="logo-img" />
+          </a>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <% if (!user) { %>
+            <!-- Visitor -->
+            <li><a href="/" class="<%= currentPage === 'home' ? 'active-link' : '' %>">Home</a></li>
+            <li><a href="/users/login" class="<%= currentPage== 'login' ? 'active-link' : '' %>">Login</a></li>
+            <li><a href="/users/signup" class="<%= currentPage== 'signup' ? 'active-link' : '' %>">Signup</a></li>
+            <li><a href="/ranking" class="<%= currentPage== 'ranking' ? 'active-link' : '' %>">Ranking</a></li>
+            <li><a href="/admin/login" class="admin-link">Admin</a></li>
+
+            <% } else if (user.role === "user") { %>
+            <!-- Normal User -->
+            <li>
+              <a href="/users/dashboard" class="<%= currentPage== 'user-dash' ? 'active-link' : '' %>">Dashboard</a>
+            </li>
+            <li>
+              <a
+                href="/users/profile"
+                class="<%= currentPage== 'profile'? 'active-link' : '' %>"
+                >Profile</a
+              >
+            </li>
+            <li><a href="/ranking" class= "<%= currentPage== 'ranking'? 'active-link' : '' %>" >Ranking</a></li>
+            <li><a href="/users/logout" class="admin-link">Logout</a></li>
+
+            <% } else if (user.role === "admin") { %>
+            <!-- Admin -->
+            <li><a href="/admin/dashboard" class="<%= currentPage=='Admin-dashboard' ?'active-link' : '' %>">Dashboard</a></li>
+            <li><a href="/admin/logout" class="admin-link">Logout</a></li>
+
+            <% } %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  </body>
+</html>

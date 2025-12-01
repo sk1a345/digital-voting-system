@@ -1,0 +1,159 @@
+<%- include('../partials/header', { title: "User Dashboard" }) %>
+
+<style>
+  .user-dashboard-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* Welcome Header */
+  .welcome-box {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+  }
+
+  .welcome-box h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: 700;
+  }
+
+  .welcome-box p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+
+  /* Status Box - Not Voted */
+  .status-box {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .status-box p {
+    font-size: 1.15rem;
+    color: #475569;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  /* Vote Button */
+  .vote-btn {
+    display: inline-block;
+    margin-top: 25px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    padding: 14px 32px;
+    font-size: 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  }
+
+  .vote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+  }
+
+  /* Already Voted */
+  .already-voted {
+    padding: 40px 30px;
+    background: #f0fdf4;
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.1);
+  }
+
+  .already-voted h2 {
+    color: #065f46;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .already-voted p {
+    font-size: 1rem;
+    color: #059669;
+    font-weight: 500;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .welcome-box {
+      padding: 35px 25px;
+    }
+
+    .welcome-box h1 {
+      font-size: 1.75rem;
+    }
+
+    .status-box,
+    .already-voted {
+      padding: 35px 25px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .welcome-box {
+      padding: 30px 20px;
+    }
+
+    .welcome-box h1 {
+      font-size: 1.5rem;
+    }
+
+    .status-box,
+    .already-voted {
+      padding: 30px 20px;
+    }
+
+    .already-voted h2 {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+<main class="content">
+
+  <div class="user-dashboard-container">
+
+    <!-- WELCOME SECTION -->
+    <div class="welcome-box">
+      <h1>Welcome, <%= final_user.name %> 👋</h1>
+      <p>Your Aadhaar: <%= aadhaar %></p>
+    </div>
+
+    <!-- VOTING STATUS -->
+    <% if (!final_user.votedFor) { %>
+
+      <div class="status-box">
+        <p>You have not voted yet.</p>
+        <a href="/users/vote" class="vote-btn">Vote Now</a>
+      </div>
+
+    <% } else { %>
+
+      <div class="already-voted">
+        <h2>🎉 You have already voted!</h2>
+        <p>Thank you for participating in the election.</p>
+      </div>
+
+    <% } %>
+
+  </div>
+
+</main>
+
+<%- include('../partials/footer') %>

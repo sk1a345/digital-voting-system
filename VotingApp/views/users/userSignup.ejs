@@ -1,0 +1,81 @@
+<!-- User Signup Page -->
+
+<%- include('../partials/header', {title: "User Signup"}) %>
+<main class="content">
+<div class="auth-container">
+  <h2>Create Account</h2>
+  <p class="auth-subtitle">Join the democratic voting system</p>
+  
+  <form action="/users/signup" method="POST" class="auth-form">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input 
+        type="text" 
+        id="name"
+        name="name" 
+        required 
+        placeholder="John Doe"
+        autocomplete="name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input 
+        type="email" 
+        id="email"
+        name="email" 
+        required 
+        placeholder="you@example.com"
+        autocomplete="email"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="age">Age</label>
+      <input 
+        type="number" 
+        id="age"
+        name="age" 
+        required 
+        min="18" 
+        max="120"
+        placeholder="18+"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="aadhaarNumber">Aadhaar Number</label>
+      <input 
+        type="text" 
+        id="aadhaarNumber"
+        name="aadhaarNumber" 
+        required 
+        maxlength="12" 
+        minlength="12" 
+        placeholder="Enter 12-digit Aadhaar"
+        pattern="[0-9]{12}"
+        title="Aadhaar must be 12 digits"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password"
+        name="password" 
+        required 
+        minlength="6" 
+        placeholder="Minimum 6 characters"
+        autocomplete="new-password"
+      >
+    </div>
+
+    <button type="submit" class="btn-primary">Create Account</button>
+
+    <p class="switch-link">Already have an account? <a href="/users/login">Login here</a></p>
+  </form>
+</div>
+</main>
+<%- include('../partials/footer') %>

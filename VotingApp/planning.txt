@@ -1,0 +1,347 @@
+1. Big Picture: What Your App Is
+
+A simple, secure system for voting.
+
+There are two roles:
+
+Admin → Manages election setup
+User (Voter) → Votes in the election
+🧠 2. Admin — Responsibilities (What Admin CAN Do)
+
+Admin is like an Election Commission officer.
+
+✔ 1. Add political parties
+
+(e.g., Congress, BJP, AAP, etc.)
+
+✔ 2. Add candidates
+
+Each candidate belongs to a party.
+
+✔ 3. Update candidate details
+
+(Name, party, age, image, etc.)
+
+✔ 4. Delete candidate
+
+If removed from election.
+
+✔ 5. View complete vote statistics
+
+Total votes
+
+Each candidate vote count
+
+Party-wise vote count (optional)
+
+Leaderboard in descending order
+
+✔ 6. Admin CANNOT vote
+
+Because admin is not a voter.
+
+✔ 7. Manage election status (optional)
+
+Start Election
+
+End Election
+
+Freeze votes (no more voting)
+
+👤 3. User — Responsibilities (What User CAN Do)
+
+User is a citizen/voter.
+
+✔ 1. Sign up
+
+Enter:
+
+Name
+
+Age
+
+Aadhar number (unique ID)
+
+Password
+
+Email (optional but useful)
+
+✔ 2. Login using
+
+Aadhar number
+
+Password
+
+✔ 3. View personal profile
+
+Shows:
+
+Name
+
+Age
+
+Aadhar (masked)
+
+Has voted or not
+
+If voted → for which candidate
+
+✔ 4. Age check (must be 18+)
+
+If age < 18 → cannot vote
+
+✔ 5. See list of candidates
+
+Each candidate shows:
+
+Name
+
+Party
+
+Total votes (optional before election ends)
+
+"Vote" button (only if they haven't voted)
+
+✔ 6. Vote once only
+
+If user votes → lock them
+
+Cannot change vote
+
+Cannot vote again
+
+✔ 7. Leaderboard
+
+User can see:
+
+Which candidate is leading
+
+Votes of all candidates
+(Depends on election rules → admin can allow or disallow live results)
+
+✔ 8. Change password
+
+User can update only their own password.
+
+
+1️⃣ PUBLIC ROUTES (Accessible to Everyone)
+
+These are pages anyone can see before login.
+
+✔ / — Home Page
+
+Displays:
+
+Logo
+
+Login
+
+Signup
+
+Ranking
+
+About Voting App (optional)
+
+✔ /users/login — User Login Page
+
+User enters:
+
+Email
+
+Password
+
+After login → redirect to User Dashboard (/users/dashboard)
+
+✔ /users/signup — User Signup Page
+
+User registers with:
+
+Name
+
+Email
+
+Password
+
+Voter ID (optional)
+
+After signup → redirect to User Dashboard
+
+✔ /ranking — Public Rankings Page
+
+Shows the current candidate rankings (visible to all).
+
+✔ /admin/login — Admin Login Page
+
+Admin enters:
+
+Admin ID / username
+
+Password
+
+After login → redirect to Admin Dashboard (/admin/dashboard)
+
+2️⃣ USER ROUTES (After Login)
+
+These pages are only accessible once the user logs in.
+
+✔ /users/dashboard — User Dashboard
+
+Shows:
+
+Welcome message
+
+Voting status (has user voted or not?)
+
+List of candidates
+
+Profile button
+
+✔ /users/vote — Voting Page
+
+User sees:
+
+Candidates list
+
+Click a button to vote
+
+Confirmation message
+
+This page appears ONLY if user has not already voted
+
+After voting → redirect to a Vote Success page or back to dashboard.
+
+✔ /users/profile — Profile Page
+
+User can view:
+
+Name
+
+Email
+
+Voter ID
+
+Option to edit (optional)
+
+✔ /users/logout
+
+Logs user out and redirects to /.
+
+3️⃣ ADMIN ROUTES (After Login)
+
+Admins will have a separate UI, completely different from users.
+
+✔ /admin/dashboard — Admin Dashboard
+
+Admin sees:
+
+Total users
+
+Total votes
+
+Candidate stats
+
+Buttons to manage candidates
+
+Buttons to view results
+
+✔ /admin/candidates — List of All Candidates
+
+Shows:
+
+Candidate names
+
+Candidate party
+
+Votes count
+
+Edit / Delete buttons
+
+✔ /admin/candidates/add — Add New Candidate
+
+Admin adds:
+
+Candidate name
+
+Party symbol
+
+Description
+
+✔ /admin/users — View All Registered Users
+
+Admin can:
+
+See user details
+
+Ban user (optional)
+
+✔ /admin/results — View Live Results
+
+Shows:
+
+Vote counts
+
+Ranking
+
+Percentage chart
+
+✔ /admin/logout
+
+Logs admin out and redirects to /admin/login.
+
+4️⃣ API ROUTES (Internal Communication Only)
+
+These are backend routes your frontend pages will use (AJAX or form submission).
+
+Examples:
+
+/api/users/signup
+
+/api/users/login
+
+/api/users/vote
+
+/api/admin/add-candidate
+
+/api/admin/get-stats
+
+You do NOT need to write them now — planning is enough.
+
+5️⃣ EJS FILE STRUCTURE (VERY IMPORTANT)
+
+Create each of these inside /views:
+
+views/
+  index.ejs
+  partials/
+    header.ejs
+    footer.ejs
+
+  users/
+    login.ejs
+    signup.ejs
+    dashboard.ejs
+    vote.ejs
+    profile.ejs
+
+  admin/
+    login.ejs
+    dashboard.ejs
+    candidates.ejs
+    addCandidate.ejs
+    users.ejs
+    results.ejs
+
+  ranking.ejs
+  404.ejs
+
+
+controllers/
+   ├── authController.js        (login, signup, logout)
+   ├── userController.js        (dashboard, vote, profile)
+   └── adminController.js       (dashboard, candidates, results)
+
+
+routes/
+   userRouter.js
+   adminRouter.js
+   authRouter.js

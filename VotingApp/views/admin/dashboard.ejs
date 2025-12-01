@@ -1,0 +1,37 @@
+<%- include('../partials/header', {title: "Admin Dashboard"}) %>
+
+<main class="content admin-dashboard">
+  <h1 class="dashboard-title">Admin Dashboard</h1>
+  <p class="dashboard-subtitle">
+    Manage election, candidates, and system controls
+  </p>
+
+  <div class="admin-actions">
+    <!-- Election Controls -->
+    <div class="action-group">
+      <h2>Election Controls</h2>
+      <a href="#" class="btn-action start">Start Election</a>
+      <a href="#" class="btn-action freeze">Freeze Election</a>
+      <a href="#" class="btn-action end">End Election</a>
+    </div>
+
+    <!-- Candidate Management -->
+    <div class="action-group">
+      <h2>Candidate Management</h2>
+      <a href="/admin/candidates/add" class="btn-action add">Add Candidate</a>
+      <a href="/admin/candidates" class="btn-action view"
+        >View All Candidates</a
+      >
+      <a href="/admin/candidates/delete" class="btn-action end">Delete Candidate</a>
+      
+    </div>
+
+    <!-- Ranking -->
+    <div class="action-group">
+      <h2>Votes & Ranking</h2>
+      <a href="/ranking" class="btn-action ranking">View Ranking</a>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,374 @@
+<%- include('partials/header', { title: "Voting App" }) %>
+
+<style>
+body {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+    font-family: "Inter", sans-serif;
+    color: #1e293b;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .home-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  /* --- HERO --- */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 60px 50px;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.1);
+    border: 2px solid rgba(79, 70, 229, 0.1);
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-text .badge {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    color: #5b21b6;
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 16px;
+  }
+
+  .hero-text h1 {
+    color: #1e293b;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+
+  .hero-text h1 span {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-text p {
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .hero-img img {
+    max-width: 320px;
+    width: 100%;
+    filter: drop-shadow(0 10px 25px rgba(79, 70, 229, 0.15));
+  }
+
+  /* --- BUTTONS --- */
+  .hero-btns {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 14px 28px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    border: none;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+  }
+
+  .btn-outline {
+    background: white;
+    color: #4f46e5;
+    border: 2px solid #4f46e5;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.15);
+  }
+
+  .btn-outline:hover {
+    background: #4f46e5;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  }
+
+  /* --- STEPS SECTION --- */
+  .steps-section {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .steps-section h2 {
+    color: #1e293b;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: 800;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+  }
+
+  .step-box {
+    padding: 20px;
+    border-radius: 16px;
+    background: white;
+    border: 2px solid rgba(79, 70, 229, 0.1);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .step-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.15);
+    border-color: #4f46e5;
+  }
+
+  .step-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    border-radius: 12px;
+    font-size: 1.8rem;
+    margin: 0 auto 20px;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  }
+
+  .step-box h3 {
+    color: #1e293b;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .step-box p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #64748b;
+  }
+
+  /* --- CTA SECTION --- */
+  .cta {
+    margin-top: 60px;
+    text-align: center;
+    padding:30px 30px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+  }
+
+  .cta h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+  }
+
+  .cta p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.15rem;
+    margin-bottom: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta .btn {
+    background: white;
+    color: #463df6;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+  }
+
+  .cta .btn:hover {
+    background: #f0f4ff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 50px 30px;
+    }
+
+    .hero-text {
+      text-align: center;
+    }
+
+    .hero-img {
+      order: -1;
+    }
+
+    .hero-img img {
+      max-width: 280px;
+      margin-bottom: 20px;
+    }
+
+    .hero-btns {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .home-wrapper {
+      padding: 40px 15px;
+    }
+
+    .hero {
+      padding: 40px 25px;
+    }
+
+    .steps-section,
+    .cta {
+      margin-top: 60px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.2rem;
+    }
+
+    .cta {
+      padding: 50px 30px;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-btns {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  } 
+</style>
+<main class="content">
+  <div class="home-wrapper">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="badge">🌐 Official Online Voting System</span>
+        <h1>Your Vote Matters. <span>Cast It Securely, Anytime.</span></h1>
+        <p>
+          Our digital voting system ensures integrity, transparency, and
+          effortless participation. Register in minutes and cast your vote from
+          anywhere—fully protected and authenticated.
+        </p>
+
+        <div class="hero-btns">
+          <a
+            href="/users/signup"
+            class="btn btn-outline"
+            style="background-color: #463df6; color: white"
+            >Start Voting</a
+          >
+          <a href="/ranking" class="btn btn-outline">Live Rankings</a>
+        </div>
+      </div>
+
+      <div class="hero-img">
+        <img src="/images/hero-vote.png" alt="Voting Image" />
+      </div>
+    </section>
+
+    <section class="steps-section">
+      <h2>Your Voting Journey</h2>
+      <div class="steps-grid">
+        <div class="step-box">
+          <div class="step-icon">🔒</div>
+          <h3>Secure Registration</h3>
+          <p>
+            Create your account and verify your identity through a safe,
+            fraud-proof process designed to protect voter authenticity.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-icon">👤</div>
+          <h3>Know Your Candidates</h3>
+          <p>
+            View each candidate’s profile, agenda, goals, and background before
+            you vote. Make an informed and confident decision.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-icon">✅</div>
+          <h3>One-Click Voting</h3>
+          <p>
+            Your vote is encrypted immediately after submission, ensuring
+            complete privacy and preventing manipulation or duplication.
+          </p>
+        </div>
+
+        <div class="step-box">
+          <div class="step-icon">📊</div>
+          <h3>Real-Time Results</h3>
+          <p>
+            Watch transparent, automatically updated rankings as votes come
+            in—powered by a tamper-resistant counting system.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Be a Part of the Decision</h2>
+      <p>
+        Your voice is powerful. Join the digital voting revolution and help
+        create a transparent and modern democratic process.
+      </p>
+      <a
+        href="/users/signup"
+        class="btn btn-outline"
+        style="background-color: white; color: blue"
+        >Register Now</a
+      >
+    </section>
+  </div>
+</main>
+
+<%- include('partials/footer') %>

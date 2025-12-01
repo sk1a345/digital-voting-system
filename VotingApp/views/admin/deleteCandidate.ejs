@@ -1,0 +1,35 @@
+<%- include('../partials/header', {title: pageTitle}) %>
+
+<main class="content">
+  <div class="candidate-grid">
+    <% candidates.forEach(c => { %>
+    <div class="candidate-card">
+      <img class="candidate-photo" src="<%= c.photo %>" alt="<%= c.name %>" />
+
+      <div class="candidate-info">
+        <h2 class="candidate-name"><%= c.name %></h2>
+        <p class="candidate-party"><%= c.party %></p>
+      </div>
+
+      <img
+        class="party-symbol"
+        src="<%= c.partySymbol %>"
+        alt="<%= c.party %> Party Symbol"
+      />
+
+      <div class="candidate-meta">
+        <form action="/admin/candidates/delete/<%= c._id %>" method="POST">
+          <button class="btn-action end">Delete Candidate</button>
+        </form>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</main>
+<style>
+  .delete-btn {
+    background-color: rgb(206, 58, 58);
+    color: white;
+  }
+</style>
+<%- include('../partials/footer') %>
